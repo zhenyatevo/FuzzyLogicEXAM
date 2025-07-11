@@ -37,7 +37,7 @@ public final class CentroidDefuzzifier {
         double denominator = 0.0;
 
         if (logging) {
-            System.out.println("\nПроцесс дефаззификации методом центра площади:");
+            System.out.println("\nПроцесс дефаззификации методом центра тяжести:");
             System.out.println("x\tμ(x)\tx*μ(x)");
             System.out.println("---------------------");
         }
@@ -49,15 +49,15 @@ public final class CentroidDefuzzifier {
                 System.out.printf("%.1f\t%.3f\t%.3f\n", x, mu, x * mu);
             }
 
-            numerator += x * mu * step;
-            denominator += mu * step;
+            numerator += x * mu * step; // Площадь прямоугольника для x*μ(x)
+            denominator += mu * step; // Площадь прямоугольника для μ(x)
         }
 
         if (logging) {
             System.out.println("... (пропущены промежуточные значения)");
             System.out.println("---------------------");
             System.out.printf("Итого: ∫x*μ(x)dx = %.3f, ∫μ(x)dx = %.3f\n", numerator, denominator);
-            System.out.printf("Центр площади = %.3f / %.3f = %.1f%%\n",
+            System.out.printf("Центр тяжести = %.3f / %.3f = %.1f%%\n",
                     numerator, denominator, denominator == 0 ? 0 : numerator / denominator);
         }
 
